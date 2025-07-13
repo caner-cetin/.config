@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vm.g.maplocalleader = " "
+vim.g.maplocalleader = " "
 
 local path_package = vim.fn.stdpath("data") .. "/site/"
 local mini_path = path_package .. "pack/deps/start/mini.nvim"
