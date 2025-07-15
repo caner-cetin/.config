@@ -55,7 +55,7 @@ later(function()
 	lspconfig.pyright.setup({})
 	lspconfig.ts_ls.setup({})
 	lspconfig.lua_ls.setup({})
-
+	lspconfig.harper_ls.setup({})
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(event)
 			local opts = { buffer = event.buf }
@@ -64,13 +64,14 @@ later(function()
 			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 			vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-			-- how the fuck does this work?
-			-- vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", opts)
-			-- vim.keymap.set("n", "<leader>xd", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", opts)
 			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 			vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 		end,
 	})
+	require("trouble").setup({})
+
+	vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", opts)
+	vim.keymap.set("n", "<leader>xd", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", opts)
 end)
 
 add("ray-x/go.nvim")
@@ -125,3 +126,10 @@ later(function()
 	vim.keymap.set("n", "<leader>fb", telescope.buffers, { desc = "telescope buffers" })
 	vim.keymap.set("n", "<leader>fh", telescope.help_tags, { desc = "telescope help" })
 end)
+add("cameron-wags/rainbow_csv.nvim")
+later(function()
+	require("rainbow_csv").setup()
+end)
+add("MeanderingProgrammer/render-markdown.nvim")
+add("EdenEast/nightfox.nvim")
+vim.cmd("colorscheme dayfox")
